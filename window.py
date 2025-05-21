@@ -14,7 +14,6 @@ class Window():
 
     def redraw(self):
         self.__root.update_idletasks()
-        self.draw_line
         self.__root.update()
 
     def wait_for_close(self):
