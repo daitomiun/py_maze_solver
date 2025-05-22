@@ -10,7 +10,6 @@ class Line():
         self.p2 = p2
 
     def draw(self, canvas, fill_color):
-        print(f"{canvas}, {fill_color}")
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
 
 class Cell():
@@ -31,17 +30,28 @@ class Cell():
         self.__x2 = x2  
         self.__y2 = y2
 
-        print(f"x1: {self.__x1} y1 {self.__y2}, | x1: {self.__x1}, y2 {self.__y2}")
         if self.has_left_wall:
-            print("left")
             self.__win.draw_line(Line(Point(self.__x1, self.__y1), Point(self.__x1, self.__y2)), "black")
         if self.has_right_wall:
-            print("rigth")
             self.__win.draw_line(Line(Point(self.__x2, self.__y1), Point(self.__x2, self.__y2)), "black")
         if self.has_top_wall:
-            print("top")
             self.__win.draw_line(Line(Point(self.__x1, self.__y1), Point(self.__x2, self.__y1)), "black")
         if self.has_bottom_wall:
-            print("bottom")
             self.__win.draw_line(Line(Point(self.__x1, self.__y2), Point(self.__x2, self.__y2)), "black")
+
+    def draw_move(self, to_cell, undo=False):
+        color = "gray" if undo else "red"
+        self_x_center = self.__x1 + (self.__x2 - self.__x1) / 2 
+        self_y_center = self.__y1 + (self.__y2 - self.__y1) / 2 
+
+        to_cell_x_center = to_cell.__x1 + (to_cell.__x2 - to_cell.__x1) / 2
+        to_cell_y_center = to_cell.__y1 + (to_cell.__y2 - to_cell.__y1) / 2
+
+        self.__win.draw_line(
+            Line(
+                Point(self_x_center, self_y_center), 
+                Point(to_cell_x_center, to_cell_y_center)
+            ),
+            color
+        )
 
