@@ -1,10 +1,21 @@
-from figures import Line, Point
+from figures import Cell, Line, Point
 from window import Window
 
 win = Window(1000, 800)
-new_line = Line(Point(30, 50), Point(100, 50))
-win.draw_line(new_line, "black")
-new_line2 = Line(Point(30, 50), Point(1000, 70))
-win.draw_line(new_line2, "black")
+c = Cell(win)
+c.has_left_wall = False
+c.draw(50, 50, 100, 100)
+
+c = Cell(win)
+c.has_right_wall = False
+c.draw(125, 125, 200, 200)
+
+c = Cell(win)
+c.has_bottom_wall = False
+c.draw(225, 225, 250, 250)
+
+c = Cell(win)
+c.has_top_wall = False
+c.draw(300, 300, 500, 500)
 win.wait_for_close()
 
