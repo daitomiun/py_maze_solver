@@ -42,11 +42,11 @@ class Cell():
     def draw_move(self, to_cell, undo=False):
         color = "gray" if undo else "red"
 
-        self_half_length = (self.__x2 - self.__x1) / 2
+        self_half_length = abs(self.__x2 - self.__x1) // 2
         self_x_center = self.__x1 + self_half_length
         self_y_center = self.__y1 + self_half_length
 
-        to_cell_half_length = (to_cell.__x2 - to_cell.__x1) / 2
+        to_cell_half_length = abs(to_cell.__x2 - to_cell.__x1) // 2
         to_cell_x_center = to_cell.__x1 + to_cell_half_length
         to_cell_y_center = to_cell.__y1 + to_cell_half_length
 
