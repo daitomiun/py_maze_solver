@@ -1,16 +1,25 @@
 from maze import Maze
 from window import Window
 
-win = Window(1000, 800)
-maze = Maze(
-    x1=20,
-    y1=20,
-    num_rows=30,
-    num_cols=30,
-    cell_size_x=20,
-    cell_size_y=20,
-    win=win
-)
+def main():
+    num_rows = 12
+    num_cols = 16
+    margin = 50
+    screen_x = 800
+    screen_y = 600
+    cell_size_x = (screen_x - 2 * margin) / num_cols
+    cell_size_y = (screen_y - 2 * margin) / num_rows
+    win = Window(screen_x, screen_y)
+    maze = Maze(
+        x1=margin,
+        y1=margin,
+        num_rows=num_rows,
+        num_cols=num_cols,
+        cell_size_x=cell_size_x,
+        cell_size_y=cell_size_y,
+        win=win
+    )
 
-win.wait_for_close()
+    win.wait_for_close()
 
+main()
