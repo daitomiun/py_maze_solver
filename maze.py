@@ -11,7 +11,7 @@ class Maze():
         num_cols,
         cell_size_x,
         cell_size_y,
-        win,
+        win=None,
     ):
         self.__x1 = x1
         self.__y1 = y1
@@ -28,6 +28,9 @@ class Maze():
             self.__cells.append([])
             for j in range(self.__num_rows):
                 self.__cells[i].append(Cell(self.__win))
+        if self.__win is None:
+            return
+
         for i in range(self.__num_cols):
             for j in range(self.__num_rows):
                 self.__draw_cell(i, j)
