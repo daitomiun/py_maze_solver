@@ -1,13 +1,16 @@
-from figures import Cell
+from maze import Maze
 from window import Window
 
 win = Window(1000, 800)
-new_cell = Cell(win)
-new_cell.draw(40, 40, 60, 60)
-new_cell_2 = Cell(win)
-new_cell_2.draw(60, 40, 80, 60)
-new_cell_3 = Cell(win)
-new_cell_3.draw(80, 40, 100, 60)
-new_cell_3.draw_move(new_cell)
+maze = Maze(
+    x1=20,
+    y1=20,
+    num_rows=30,
+    num_cols=30,
+    cell_size_x=20,
+    cell_size_y=20,
+    win=win
+)
+
 win.wait_for_close()
 
