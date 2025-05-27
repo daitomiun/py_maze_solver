@@ -36,6 +36,8 @@ class Maze():
                 self.__draw_cell(i, j)
 
     def __draw_cell(self, i, j):
+        if self.__win is None:
+            return
         x1= self.__x1 + i * self.__cells_size_x
         y1= self.__y1 + j * self.__cells_size_y
         x2= x1 + self.__cells_size_x
