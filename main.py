@@ -17,7 +17,8 @@ def main():
         num_cols=num_cols,
         cell_size_x=cell_size_x,
         cell_size_y=cell_size_y,
-        win=win
+        win=win,
+        seed=1
     )
 
     win.wait_for_close()
