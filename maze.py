@@ -12,7 +12,8 @@ class Maze():
         cell_size_x,
         cell_size_y,
         win=None,
-        seed=None
+        seed=None,
+        maze_gen_speed=0.005
     ):
         self.__x1 = x1
         self.__y1 = y1
@@ -22,11 +23,13 @@ class Maze():
         self.__cells_size_x = cell_size_x
         self.__cells_size_y = cell_size_y
         self.__win = win 
+        self.__maze_gen_speed=maze_gen_speed
         if seed:
             random.seed(seed)
         self.__create_cells()
         self.__break_entrance_and_exit()
         self.__break_walls_r(0, 0)
+        self.__reset_cells_visited()
 
     def __create_cells(self):
         for i in range(self.__num_cols):
@@ -55,7 +58,7 @@ class Maze():
         if self.__win is None:
             return
         self.__win.redraw()
-        time.sleep(0.005)
+        time.sleep(self.__maze_gen_speed)
 
     def __break_entrance_and_exit(self):
         last_col = self.__num_cols - 1
@@ -109,4 +112,56 @@ class Maze():
             if not self.__cells[d[0]][d[1]].visited:
                 possible_directions.append(i)
         return possible_directions
+
+    def __reset_cells_visited(self):
+        for i in range(self.__num_cols):
+            for j in range(self.__num_rows):
+                self.__cells[i][j].visited = False
+        print("Cells reset!")
+
+    def solve(self):
+        print("solve maze")
+        return self._solve_r(0, 0)
+ 
+    def _solve_r(self, i, j):
+        self.__animate()
+        self.__cells[i][j].visited = True
+        if i == self.__num_cols - 1 and j == self.__num_rows - 1: 
+            return True
+
+        right = i+1
+        left = i-1
+        top = j-1
+        bottom = j+1
+
+        open_right_path = i < self.__num_cols - 1 and not self.__cells[i][j].has_right_wall and not self.__cells[right][j].visited
+        open_left_path = i > 0 and not self.__cells[i][j].has_left_wall and not self.__cells[left][j].visited
+        open_top_path = j > 0 and not self.__cells[i][j].has_top_wall and not self.__cells[i][top].visited
+        open_bottom_path = j < self.__num_rows - 1 and not self.__cells[i][j].has_bottom_wall and not self.__cells[i][bottom].visited
+
+        if open_right_path: 
+           self.__cells[i][j].draw_move(self.__cells[right][j])
+           if self._solve_r(right, j):
+                return True
+           else:
+                self.__cells[i][j].draw_move(self.__cells[right][j], True)
+        if open_left_path: 
+           self.__cells[i][j].draw_move(self.__cells[left][j])
+           if self._solve_r(left, j):
+                return True
+           else:
+               self.__cells[i][j].draw_move(self.__cells[left][j], True)
+        if open_top_path:  
+           self.__cells[i][j].draw_move(self.__cells[i][top])
+           if self._solve_r(i, top):
+                return True
+           else:
+               self.__cells[i][j].draw_move(self.__cells[i][top], True)
+        if open_bottom_path:  
+           self.__cells[i][j].draw_move(self.__cells[i][bottom])
+           if self._solve_r(i, bottom):
+                return True
+           else:
+               self.__cells[i][j].draw_move(self.__cells[i][bottom], True)
+        return False
 

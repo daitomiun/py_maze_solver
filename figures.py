@@ -32,12 +32,14 @@ class Cell():
         self.__y2 = y2
         if self.__win is None:
             return
-        left_wall_color = "black" if self.has_left_wall else "white"
+        wall_color = "black"
+        wall_broken_color = "#d9d9d9"
+        left_wall_color = wall_color if self.has_left_wall else wall_broken_color
         left_wall = Line(Point(self.__x1, self.__y1), Point(self.__x1, self.__y2))
-        right_wall_color = "black" if self.has_right_wall else "white"
+        right_wall_color = wall_color if self.has_right_wall else wall_broken_color
         right_wall = Line(Point(self.__x2, self.__y1), Point(self.__x2, self.__y2))
-        top_wall_color = "black" if self.has_top_wall else "white"
-        bottom_wall_color = "black" if self.has_bottom_wall else "white"
+        top_wall_color = wall_color if self.has_top_wall else wall_broken_color
+        bottom_wall_color = wall_color if self.has_bottom_wall else wall_broken_color
 
         top_wall = Line(Point(self.__x1, self.__y1), Point(self.__x2, self.__y1))
         bottom_wall = Line(Point(self.__x1, self.__y2), Point(self.__x2, self.__y2))
