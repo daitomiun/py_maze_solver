@@ -63,6 +63,6 @@ class Tests(unittest.TestCase):
             for j in range(m1._Maze__num_rows):
                 self.assertFalse(m1._Maze__cells[i][j].visited)
 
-
+   
 if __name__ == "__main__":
     unittest.main()

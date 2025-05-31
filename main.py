@@ -3,8 +3,8 @@ from window import Window
 import sys
 
 def main():
-    num_rows = 14
-    num_cols = 20
+    num_rows = 25
+    num_cols = 30
     margin = 50
     screen_x = 800
     screen_y = 600
